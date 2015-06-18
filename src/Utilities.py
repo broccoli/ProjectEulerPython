@@ -1,6 +1,38 @@
 
 from time import time
 
+import math
+
+
+def get_primes_below(num):
+    
+    if num < 2:
+        return []
+    primes = [2]
+    if num == 3:
+        return primes
+#     primes.append(3)
+#     if num in [4, 5]:
+#         return primes
+
+
+    test_num = 3
+    while(test_num < num):
+        is_prime = False
+        top = math.sqrt(test_num)
+        for prime in primes:
+            if test_num % prime == 0:
+                is_prime = False
+                break
+            if prime > top:
+                # don't need to test primes that are larger than square root
+                is_prime = True
+                break
+        if is_prime:
+            primes.append(test_num)
+        test_num += 2
+    
+
 class Timer:
     
     def start(self):
