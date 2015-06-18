@@ -8,6 +8,7 @@ import math
 
 def smallest_evenly_divisible(num):
     
+    # get all the primes and multiply together
     primes = get_primes_less_than(num)
     base = 1
     for x in primes:
@@ -46,6 +47,8 @@ def get_primes_less_than(num):
 def is_prime(num):
     if num == 2:
         return True
+    if num < 2:
+        return False
     if num % 2 == 0:
         return False
     for x in range(3, int(math.sqrt(num)) + 1, 2):
