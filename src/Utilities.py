@@ -13,10 +13,11 @@ def timewrap2(func):
     def new_func(*args, **kwargs):
         print "starting %s" % func.__name__
         start_time = time()
-        func(*args, **kwargs)
+        result = func(*args, **kwargs)
         end_time = time() - start_time
         print "elapsed time: %f" % end_time
         print
+        return result
     return new_func
 
 def timewrap(switch='off'):
@@ -25,10 +26,11 @@ def timewrap(switch='off'):
             if switch == 'on':
                 print "starting %s" % func.__name__
                 start_time = time()
-            func(*args, **kwargs)
+            result = func(*args, **kwargs)
             if switch == 'on':
                 end_time = time() - start_time
                 print "elapsed time: %f" % end_time
                 print
+            return result
         return new_func
     return decorator
