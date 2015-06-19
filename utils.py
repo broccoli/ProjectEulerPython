@@ -57,16 +57,24 @@ def timewrap2(func):
         return result
     return new_func
 
-def timewrap(switch='off'):
+def timewrap(switch='off', times = 1):
+    if switch == 'off':
+        times = 1
     def decorator(func):
         def new_func(*args, **kwargs):
+            total_time = 0
             if switch == 'on':
                 print "starting %s" % func.__name__
+            for rep in range(times):
                 start_time = time()
-            result = func(*args, **kwargs)
-            if switch == 'on':
+                result = func(*args, **kwargs)
                 end_time = time() - start_time
-                print "elapsed time: %f" % end_time
+                total_time += end_time
+            if switch == 'on':
+                ave_time = total_time / times
+                print ave_time
+                print "{} reps, ave. time: {:.20f}".format(times, ave_time)
+                #print "elapsed time: %f" % end_time
                 print
             return result
         return new_func
