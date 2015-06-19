@@ -6,15 +6,16 @@ import math
 
 def get_primes_below(num):
     
+    """
+    method starts with a list of primes and then test other numbers against the list
+    to see if it is prime.  If so, it is added to the list
+    """
+    
     if num < 2:
         return []
     primes = [2]
     if num == 3:
         return primes
-#     primes.append(3)
-#     if num in [4, 5]:
-#         return primes
-
 
     test_num = 3
     while(test_num < num):
@@ -31,6 +32,9 @@ def get_primes_below(num):
         if is_prime:
             primes.append(test_num)
         test_num += 2
+        if (test_num + 2) % 3 == 0:
+            # skip multiples of 3
+            test_num += 2
     
     return primes
 
