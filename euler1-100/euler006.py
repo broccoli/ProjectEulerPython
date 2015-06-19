@@ -55,7 +55,7 @@ def sum_square_difference(num):
 if __name__ == '__main__':
     
 
-     print sum_square_difference2(10)
+     print sum_square_difference2(100)
 
 
 

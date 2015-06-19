@@ -1,12 +1,13 @@
 '''
-Created on Jun 17, 2015
+2520 is the smallest number that can be divided by each of the 
+numbers from 1 to 10 without any remainder.
 
-@author: richard
-'''
+What is the smallest positive number that is evenly divisible 
+by all of the numbers from 1 to 20?'''
 
 import math
 
-def smallest_evenly_divisible(num):
+def smallest_multiple(num):
     
     # get all the primes and multiply together
     primes = get_primes_less_than(num)
@@ -58,5 +59,5 @@ def is_prime(num):
 
 if __name__ == '__main__':
     
-    print smallest_evenly_divisible(20)
+    print smallest_multiple(20)
 
