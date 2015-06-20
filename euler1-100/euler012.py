@@ -23,24 +23,6 @@ from utils import Primes
 
 import profile
 
-
-def highly_divisible_triangular_number2(num):
-    
-    tval = 1
-    ctr = 1
-    while(True):
-        
-        # get factors for tval
-        
-        factors = get_factors(tval)
-        if len(factors) > num:
-            break
-        
-    
-    pass
-
-
-
 def highly_divisible_triangular_number(num):
     
     """
