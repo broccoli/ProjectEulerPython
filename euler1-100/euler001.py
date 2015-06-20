@@ -6,16 +6,12 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 """
 
 
-from utils import timewrap, timewrap2
+import profile
 
-switch = 'on'
-reps = 1
-
-@timewrap(switch, reps)
 def multiples_of_3_and_5_a(top):
     
     total = 0
-    for x in range(3, top, 2):
+    for x in range(3, top):
         if x % 3 == 0:
             total = total + x
         elif x % 5 == 0:
@@ -23,8 +19,6 @@ def multiples_of_3_and_5_a(top):
 
     return total
 
-#@timewrap(switch, reps)
-@timewrap2
 def multiples_of_3_and_5_b(top):
     
     total = 0
@@ -36,7 +30,6 @@ def multiples_of_3_and_5_b(top):
     return total
 
 
-@timewrap(switch, reps)
 def multiples_of_3_and_5_c(top):
     """
     multiples of 3 and 5 appear in a pattern that repeats every 15 numbers
@@ -46,6 +39,7 @@ def multiples_of_3_and_5_c(top):
     base = 0 #start at 0
     total = 0
     stop = False
+
     while not stop:
         
         for i in series:
@@ -60,10 +54,106 @@ def multiples_of_3_and_5_c(top):
         
     return total
 
+def multiples_of_3_and_5_d(top):
+    """
+    multiples of 3 and 5 appear in a pattern that repeats every 15 numbers
+    
+    This approach did very poorly until I cached the len().
+    Array access still appears to slow it down.
+    """
+
+    series_diff = [3, 2, 1, 3, 1, 2, 3]
+    length = len(series_diff)
+    base = 0 #start at 0
+    total = 0
+    stop = False
+
+    num = 3
+    i = 1
+    while num < top:
+        total += num        
+        num = num + series_diff[i]
+        if i < length - 1:
+            i += 1
+        else:
+            i = 0
+            
+    return total
+
+
+def multiples_of_3_and_5_e(top):
+    """
+    multiples of 3 and 5 appear in a pattern that repeats every 15 numbers
+    """
+
+    series_diff = [3, 2, 1, 3, 1, 2, 3]
+    num = 0 #start at 0
+    total = 0
+    stop = False
+
+    while not stop:
+        
+        for i in series_diff:
+            num = num + i
+            if num >= top:
+                stop = True
+                break
+            else:
+                total = total + num
+                
+        
+    return total
+
+
+def multiples_of_3_and_5_f(top):
+    """
+    multiples of 3 and 5 appear in a pattern that repeats every 15 numbers
+    
+    The generator approach profiles badly.
+    """
+    series_diff = [3, 2, 1, 3, 1, 2, 3]
+    
+    def diff_gen():
+        while(True):
+            for diff in series_diff:
+                yield diff
+        
+    num = 0 #start at 0
+    total = 0
+    stop = False
+    
+    diff = diff_gen()
+    
+    num = diff.next()
+
+    while num < top:
+        
+        total = total + num
+        num = num + diff.next()
+        
+    return total
+
+
+def test():
+    val = 1000
+    reps = 1000
+    for r in range(reps):
+        multiples_of_3_and_5_a(val)
+        multiples_of_3_and_5_b(val)
+        multiples_of_3_and_5_c(val)
+        multiples_of_3_and_5_d(val)
+        multiples_of_3_and_5_e(val)
+        multiples_of_3_and_5_f(val)
+
 
 
 if __name__ == '__main__':
-    print multiples_of_3_and_5_a(1000)
-    print multiples_of_3_and_5_b(1000)
-    print multiples_of_3_and_5_c(1000)
-    
+     val = 1000
+     print multiples_of_3_and_5_a(val)
+     print multiples_of_3_and_5_b(val)
+     print multiples_of_3_and_5_c(val)
+     print multiples_of_3_and_5_d(val)
+     print multiples_of_3_and_5_e(val)
+     print multiples_of_3_and_5_f(val)
+
+     profile.run("test()")
