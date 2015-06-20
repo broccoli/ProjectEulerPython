@@ -1,7 +1,7 @@
 
 from time import time
 
-import math
+from math import sqrt
 
 
 def get_primes_below(num):
@@ -20,7 +20,7 @@ def get_primes_below(num):
     test_num = 3
     while(test_num < num):
         is_prime = False
-        top = math.sqrt(test_num)
+        top = sqrt(test_num)
         for prime in primes:
             if test_num % prime == 0:
                 is_prime = False
@@ -37,6 +37,99 @@ def get_primes_below(num):
             test_num += 2
     
     return primes
+
+
+
+class Primes:
+    
+    
+    """
+    Utility functions used in 012
+    """
+    def __init__(self):
+        self.primes = [2, 3]
+        self.fill_primes(65500)
+        # a list of prime factor is initialized for 012
+        
+    
+    def get_prime_factors(self, val):
+        prime_factors = []
+        top = val / 2
+
+#         if self.primes[-1] < val / 2:
+#             self.fill_primes(val)
+            
+            
+        for prime in self.primes:
+            if val % prime == 0:
+                prime_factors.append(prime)
+                val = val / prime
+                while (val % prime == 0):
+                    val = val / prime
+            if prime > val or prime > top:
+                break
+        
+        return prime_factors
+    
+    
+    def fill_primes(self, limit):
+        """
+        fill the existing primes list up to the  limit
+        """
+        
+        if self.primes[-1] + 1 >= limit:
+            # get out if the limit is less than or equal to the
+            # last prime or the next even integer up
+            return
+        test_num = self.primes[-1] + 2
+        while(test_num <= limit):
+            is_prime = False
+            top = sqrt(test_num)
+            for prime in self.primes:
+                if test_num % prime == 0:
+                    is_prime = False
+                    break
+                if prime > top:
+                    # don't need to test primes that are larger than square root
+                    is_prime = True
+                    break
+            if is_prime:
+                self.primes.append(test_num)
+            test_num += 2
+            while(test_num % 3 == 0 or test_num % 5 == 0):
+                # skip multiples of 3 and 5
+                test_num += 2
+    
+    
+    def primes_generator(self):
+        
+        self.primes.append(2)
+        yield 2
+        self.primes.append(3)
+        yield 3
+        test_num = 5
+        
+        while(True):
+            is_prime = False
+            top = sqrt(test_num)
+            for prime in self.primes:
+                if test_num % prime == 0:
+                    is_prime = False
+                    break
+                if prime > top:
+                    # don't need to test primes that are larger than square root
+                    is_prime = True
+                    break
+            if is_prime:
+                self.primes.append(test_num)
+                #print self.primes
+                yield(test_num)
+            test_num += 2
+            if (test_num) % 3 == 0:
+                # skip multiples of 3
+                test_num += 2
+    
+    
 
 class Timer:
     
