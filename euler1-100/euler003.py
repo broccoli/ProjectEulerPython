@@ -39,7 +39,7 @@ def largest_prime_factor(num):
     """
     Repeatedly factor a number starting with its smallest prime.
     In the case of 600851475143, this method is faster. In other cases,
-    it is slower
+    it is slower.
     """
     
     while(True):
