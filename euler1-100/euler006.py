@@ -21,7 +21,6 @@ import profile
 def sum_square_difference2(num):
     
     return sum(range(num + 1))**2 - sum([x**2 for x in range(num + 1)])
-    
 
 
 def sum_square_difference(num):
@@ -46,6 +45,16 @@ def sum_square_difference(num):
             total += x * y
     return 2 * total
 
+def sum_square_difference3(num):
+    """
+    Computes 2(ab + ac + bc).
+    Slowest method of all.
+    """
+    
+    a = range(1, num + 1)
+    
+    return sum([x * y for x in a for y in a if x != y])
+
 
 def test():
     reps = 10000
@@ -53,12 +62,14 @@ def test():
     for r in range(reps):
         sum_square_difference(num)
         sum_square_difference2(num)
+        sum_square_difference3(num)
 
 if __name__ == '__main__':
     
 
     print sum_square_difference(100)
     print sum_square_difference2(100)
+    print sum_square_difference3(100)
 
     profile.run("test()")
 
