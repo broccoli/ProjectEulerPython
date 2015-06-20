@@ -53,12 +53,12 @@ class Primes:
         
     
     def get_prime_factors(self, val):
+        
+        """
+        get unique prime factors        
+        """
         prime_factors = []
         top = val / 2
-
-#         if self.primes[-1] < val / 2:
-#             self.fill_primes(val)
-            
             
         for prime in self.primes:
             if val % prime == 0:
