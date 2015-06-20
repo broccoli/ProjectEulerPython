@@ -13,29 +13,25 @@ one hundred natural numbers and the square of the sum.
 '''
 
 
-"""
-Using algebra, (a + b + c)^2 - a^2 - b^2 - c^2 =
-2(ab + ac + bc)
-
-I made two versions based on this principal.  But I found it is more
-efficient to compute the answer directly, as in this solution from the
-discussion board:
-
-sum([x for x in range(101)])**2 - sum([x**2 for x in range(101)])
-"""
 
 from utils import timewrap, timewrap2
 
-switch = 'on'
+import profile
 
-@timewrap2
 def sum_square_difference2(num):
     
-    return sum([x * y for x in range(1, num + 1) for y in range(1, num + 1) if x != y])
+    return sum(range(num + 1))**2 - sum([x**2 for x in range(num + 1)])
+    
 
 
-@timewrap(switch)
 def sum_square_difference(num):
+    """
+    Using algebra, (a + b + c)^2 - a^2 - b^2 - c^2 =
+    2(ab + ac + bc)
+    
+    
+    This method is slower than doing it explicitly with sum and range.
+    """
     
     
     list1 = range(1, num + 1)
@@ -43,20 +39,28 @@ def sum_square_difference(num):
     total = 0
     
     list2 = list1[:-1]
-    list3 = list1[:]
     
     for x in list2:
-        list3 = list3[1:]
-        for y in list3:
-            if x != y:
-                total += x * y
+        list1 = list1[1:]
+        for y in list1:
+            total += x * y
     return 2 * total
+
+
+def test():
+    reps = 10000
+    num = 100
+    for r in range(reps):
+        sum_square_difference(num)
+        sum_square_difference2(num)
 
 if __name__ == '__main__':
     
 
-     print sum_square_difference2(100)
+    print sum_square_difference(100)
+    print sum_square_difference2(100)
 
+    profile.run("test()")
 
 
 
