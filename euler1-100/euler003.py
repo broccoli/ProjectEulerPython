@@ -38,8 +38,8 @@ def largest_prime_factor(num):
     
     """
     Repeatedly factor a number starting with its smallest prime.
-    In the case of 600851475143, this method is faster.  In other cases,
-    it is slower.
+    In the case of 600851475143, this method is faster. In other cases,
+    it is slower
     """
     
     while(True):
@@ -70,9 +70,9 @@ def test(num):
         largest_prime_factor_b(num)
 
 if __name__ == '__main__':
-#     num = 600851475143
+    num = 600851475143
 #     num = 3 ** 10
-    num = 2 * 3 * 5 * 7 * 11 * 17 * 6857
+#     num = 2 * 3 * 5 * 7 * 11 * 17 * 6857
 #     num = 18
     
     print largest_prime_factor(num)
