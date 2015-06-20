@@ -4,6 +4,7 @@ we can see that the 6th prime is 13. What is the 10 001st prime number?
 '''
 
 import math
+import profile
 
 def find_prime(num):
     
@@ -12,12 +13,12 @@ def find_prime(num):
     adds the number to the list if they are not divisible by primes.
     """
     
-    if num == 1:
-        return 2
+    primes = [2, 3, 5]
+    if num < 4:
+        return primes[num - 1]
     
-    ctr = 1
-    test_num = 3
-    primes = [2]
+    ctr = 3
+    test_num = 7
     while(True):
         is_prime = False
         top = math.sqrt(test_num)
@@ -36,11 +37,21 @@ def find_prime(num):
             break
         else:
             test_num += 2
+            while (test_num % 3 == 0 or test_num % 5 == 0):
+                test_num += 2
     return test_num
         
 
-
+def test():
+    
+    reps = 10
+    num = 10001
+    for r in range(reps):
+        find_prime(num)
 
 
 if __name__ == '__main__':
-    print find_prime(10001)
+    num = 10001
+    print find_prime(num)
+    
+    profile.run("test()")
