@@ -14,6 +14,8 @@ def smallest_multiple_b(num):
     # get a list of primes less than num and multiply product by prime.
     # For every time the prime squared, cubed, etc is lte the num,
     # multiple product by the prime.  That takes care of 4, 8, 9, etc.
+    
+    # seems to be some efficiency gains with ** instead of pow
     primes = []
     prod = 1
     for x in range(2, num + 1):
@@ -24,7 +26,7 @@ def smallest_multiple_b(num):
             primes.append(x)
             prod = prod * x
             exp = 2
-            while pow(x, exp) <= num:
+            while x ** exp <= num:
                 prod = prod * x
                 exp += 1
     return prod    
@@ -98,5 +100,5 @@ if __name__ == '__main__':
     print smallest_multiple(10)
     print smallest_multiple_b(10)
     
-#     profile.run("test()")
+    profile.run("test()")
 #     print get_primes_less_than(10)
