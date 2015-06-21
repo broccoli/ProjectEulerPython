@@ -12,10 +12,10 @@ s = math.sqrt
 
 def f1():
     
-    return 2 ** 4
+    return 2 * 2 * 2 * 2
 
 def f2():
-    return pow(2, 4)
+    return 2 ** 4
 
 def main():
     
