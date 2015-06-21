@@ -98,14 +98,28 @@ def multiples_of_3_and_5_e(top):
             if num >= top:
                 stop = True
                 break
-            else:
-                total = total + num
+            total = total + num
                 
         
     return total
 
 
+
 def multiples_of_3_and_5_f(top):
+
+    """
+    multiples of 3 and 5 appear in a pattern that repeats every 15 numbers
+    
+    create a list of all the numbers and sum the list.
+    """
+
+    series = [3, 5, 6, 9, 10, 12, 15]
+    
+    list1 = [(15 * b) + a for b in range(top / 15 + 1) for a in series if (15 * b) + a < top]
+    
+    return sum(list1)
+
+def multiples_of_3_and_5_g(top):
     """
     multiples of 3 and 5 appear in a pattern that repeats every 15 numbers
     
@@ -144,6 +158,7 @@ def test():
         multiples_of_3_and_5_d(val)
         multiples_of_3_and_5_e(val)
         multiples_of_3_and_5_f(val)
+#         multiples_of_3_and_5_g(val)
 
 
 
@@ -155,5 +170,6 @@ if __name__ == '__main__':
      print multiples_of_3_and_5_d(val)
      print multiples_of_3_and_5_e(val)
      print multiples_of_3_and_5_f(val)
+     print multiples_of_3_and_5_g(val)
 
      profile.run("test()")
