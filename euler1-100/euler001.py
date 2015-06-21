@@ -117,7 +117,7 @@ def multiples_of_3_and_5_f(top):
 
     series = [3, 5, 6, 9, 10, 12, 15]
     
-    list1 = ((15 * b) + a for b in range(top / 15 + 1) for a in series if (15 * b) + a < top)
+    list1 = [(15 * b) + a for b in range(top / 15 + 1) for a in series if (15 * b) + a < top]
     
     return sum(list1)
 
